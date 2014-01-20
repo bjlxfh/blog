@@ -10,9 +10,13 @@
 class Bootstrap extends Yaf_Bootstrap_Abstract{
 
     public function _initConfig() {
-		//把配置保存起来
-		$arrConfig = Yaf_Application::app()->getConfig();
-		Yaf_Registry::set('config', $arrConfig);
+	//把配置保存起来
+    $config = Yaf_Application::app()->getConfig();
+	Yaf_Registry::set("config", $config);	  
+    #自定义常量
+    define('PATH_APP',Yaf_Registry::get('config')->application->directory);
+
+    define('PATH_TPL',PATH_APP.'/views');
 	}
 
 	public function _initPlugin(Yaf_Dispatcher $dispatcher) {
@@ -23,6 +27,12 @@ class Bootstrap extends Yaf_Bootstrap_Abstract{
 
 	public function _initRoute(Yaf_Dispatcher $dispatcher) {
 		//在这里注册自己的路由协议,默认使用简单路由
+		//$config=Yaf_Registry::get('config');
+		//$routeConfigs=isset($config['routes']) ? $config['routes'] :array();
+		//var_dump($routeConfigs);exit;
+    //Yaf_Router::addConfig($routeConfigs);
+		//Yaf_Dispatcher::getInstance()->getRouter()->addConfig($routeConfigs);
+
 	}
 	
 	public function _initView(Yaf_Dispatcher $dispatcher){
